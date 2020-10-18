@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 
 class PokemonDetails extends React.Component {
 
@@ -17,15 +18,19 @@ class PokemonDetails extends React.Component {
         })
     }
 
+    onBackButtonClick = () => {
+        this.props.history.goBack();
+    }
+
     renderPokemon = () => {
         const { imageUrl, name, types, abilities, height, weight } = this.state.pokemonDetails;
         return (
             <div>
-                <p>{`name: ${name}`}</p>
-                <p>{`types: ${types}`}</p>
-                <p>{`abilities: ${abilities}`}</p>
-                <p>{`height: ${height}`}</p>
-                <p>{`weight: ${weight}`}</p>
+                <h3>{`name: ${name}`}</h3>
+                <h3>{`types: ${types}`}</h3>
+                <h3>{`abilities: ${abilities}`}</h3>
+                <h3>{`height: ${height}`}</h3>
+                <h3>{`weight: ${weight}`}</h3>
                 <img src={imageUrl}/>
             </div>
         )
@@ -34,11 +39,12 @@ class PokemonDetails extends React.Component {
     render() {
         return (
             <div>
-                <h1>Pokemon details!</h1>
+                <h1>Pokemon details</h1>
                 {this.state.pokemonDetails && this.renderPokemon()}
+                <button onClick={this.onBackButtonClick}>Back to list</button>
             </div>
         )
     }
 }
 
-export default PokemonDetails;
+export default withRouter(PokemonDetails);
