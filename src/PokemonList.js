@@ -4,7 +4,7 @@ class PokemonList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { pokemonList: [], next: null, prev: null };
+        this.state = { pokemonList: [], loadMore: null};
     }
 
     componentDidMount() {
@@ -16,17 +16,13 @@ class PokemonList extends React.Component {
         .then(response => response.json())
         .then(jsonResponse => {
             console.log(jsonResponse);
-            const { results, next, prev } = jsonResponse; 
-            this.setState({ pokemonList: results, next: next, prev: prev });
+            const { results, next } = jsonResponse; 
+            this.setState({ pokemonList: this.state.pokemonList.concat(results), loadMore: next });
         })
     }
 
-    onNextButtonClick = () => {
-        this.fetchPokemonList(this.state.next);
-    }
-
-    onPrevButtonClick = () => {
-        this.fetchPokemonList(this.state.prev);
+    onLoadMoreButtonClick = () => {
+        this.fetchPokemonList(this.state.loadMore);
     }
 
     renderList = (pokemonList) => {
@@ -49,18 +45,15 @@ class PokemonList extends React.Component {
     }
 
     render() {
-        window.scrollTo(0, 0)
+        //window.scrollTo(0, 0)
         return (
             <div>
                 <h1>Pokemon List:</h1>
-                {this.state.prev && <button onClick={this.onPrevButtonClick}>Prev</button>}
-                {this.state.next && <button onClick={this.onNextButtonClick}>Next</button> }
                 <table>
                     <thead>{this.renderHeader()}</thead>
                     <tbody>{this.renderList(this.state.pokemonList)}</tbody>
                 </table>
-                {this.state.prev && <button onClick={this.onPrevButtonClick}>Prev</button>}
-                {this.state.next && <button onClick={this.onNextButtonClick}>Next</button> }
+                {this.state.loadMore && <button onClick={this.onLoadMoreButtonClick}>Load More</button> }
             </div>
         )
     }
