@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 
 class PokemonList extends React.Component {
 
@@ -29,10 +30,15 @@ class PokemonList extends React.Component {
         this.fetchPokemonList(this.state.prev);
     }
 
+    onItemClick(name){
+        this.props.history.push({pathname: `/pokemon/${name}`});
+    }
+
     renderList = (pokemonList) => {
         return pokemonList.map((pokemon, index) => {
             const { imageUrl, name, level } = pokemon;
-            return <tr key={index}>
+            const itemClick = this.onItemClick.bind(this, name);
+            return <tr onClick={itemClick} key={index}>
                 <td><img src={imageUrl} /></td>
                 <td><p>{name}</p></td>
                 <td><p>{level}</p></td>
@@ -66,4 +72,4 @@ class PokemonList extends React.Component {
     }
 }
 
-export default PokemonList;
+export default withRouter(PokemonList);
