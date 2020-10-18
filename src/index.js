@@ -4,11 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import PokemonList from './PokemonList';
+import { BrowserRouter, Route } from 'react-router-dom';
+import PokemonDetails from './PokemonDetails';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <PokemonList/>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  //   <PokemonList/>
+  // </React.StrictMode>,
+  <BrowserRouter>
+  <div>
+    <Route exact path= "/" component={PokemonList}/>
+    <Route path="/pokemon/:name" component={PokemonDetails}/>
+  </div>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
