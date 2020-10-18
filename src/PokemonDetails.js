@@ -40,7 +40,10 @@ class PokemonDetails extends React.Component {
         return (
             <div>
                 <h1>Pokemon details</h1>
+                {/* renderujemy szczegóły jeśli state pokemon details istnieje */}
                 {this.state.pokemonDetails && this.renderPokemon()}
+                {/* renderujemy napis ładowania jeśli state pokemon details nie istnieje */}
+                {!this.state.pokemonDetails && <h2>Loading details</h2>}
                 <button onClick={this.onBackButtonClick}>Back to list</button>
             </div>
         )
