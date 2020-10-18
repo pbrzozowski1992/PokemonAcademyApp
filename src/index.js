@@ -12,10 +12,10 @@ ReactDOM.render(
   //   <PokemonList/>
   // </React.StrictMode>,
   <BrowserRouter>
-  <div>
-    <Route exact path= "/" component={PokemonList}/>
-    <Route path="/pokemon/:name" component={PokemonDetails}/>
-  </div>
+    <div>
+      <Route exact path="/" component={PokemonList}/>
+      <Route path="/pokemon/:name" component={PokemonDetails}/>
+    </div>
   </BrowserRouter>,
   document.getElementById('root')
 );
