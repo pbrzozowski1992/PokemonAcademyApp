@@ -1,5 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import loadingHOC from './loadingHOC';
 
 class PokemonDetails extends React.Component {
 
@@ -15,6 +16,7 @@ class PokemonDetails extends React.Component {
         .then(jsonResponse => {
             console.log(jsonResponse);
             this.setState({pokemonDetails: jsonResponse});
+            this.props.changeLoadingIndicator(false);
         })
     }
 
@@ -37,17 +39,15 @@ class PokemonDetails extends React.Component {
     }
 
     render() {
+        console.log(this.props.getLoadingStatus());
         return (
             <div>
                 <h1>Pokemon details</h1>
-                {/* renderujemy szczegóły jeśli state pokemon details istnieje */}
-                {this.state.pokemonDetails && this.renderPokemon()}
-                {/* renderujemy napis ładowania jeśli state pokemon details nie istnieje */}
-                {!this.state.pokemonDetails && <h2>Loading details</h2>}
+                {!this.props.getLoadingStatus() && this.renderPokemon()}
                 <button onClick={this.onBackButtonClick}>Back to list</button>
             </div>
         )
     }
 }
 
-export default withRouter(PokemonDetails);
+export default loadingHOC(withRouter(PokemonDetails), "Pokemon Details loading!");
