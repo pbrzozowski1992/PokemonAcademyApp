@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
+import logProps from './logProps'
 
 class PokemonDetails extends React.Component {
 
@@ -50,4 +51,4 @@ class PokemonDetails extends React.Component {
     }
 }
 
-export default withRouter(PokemonDetails);
+export default logProps(withRouter(PokemonDetails));

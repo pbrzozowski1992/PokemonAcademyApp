@@ -1,5 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
+import Header from './Header';
+import logProps from './logProps'
 
 class PokemonList extends React.Component {
 
@@ -58,7 +60,7 @@ class PokemonList extends React.Component {
         window.scrollTo(0, 0)
         return (
             <div>
-                <h1>Pokemon List:</h1>
+                <Header title={this.state.next}/>
                 {this.state.prev && <button onClick={this.onPrevButtonClick}>Prev</button>}
                 {this.state.next && <button onClick={this.onNextButtonClick}>Next</button> }
                 <table>
@@ -72,4 +74,4 @@ class PokemonList extends React.Component {
     }
 }
 
-export default withRouter(PokemonList);
+export default logProps(withRouter(PokemonList));
