@@ -10,10 +10,7 @@ const RegisterForm = (props) => {
 
     const onRegisterButtonClick = (event) => {
         event.preventDefault();
-        console.log('login', loginRef.value);
-        console.log('password', passwordRef.value);
         const user = {login: loginRef.value, password: passwordRef.value}
-        console.log('user', JSON.stringify(user));
         fetch("https://pokemon-academy-api-pbr.herokuapp.com/pokemons/signup", {
             method: 'POST',
             body: JSON.stringify(user),
@@ -27,11 +24,8 @@ const RegisterForm = (props) => {
             } else {
                 throw new Error("User already exists in db!")
             }
-            console.log('status', response.status);
         })
         .catch(error=>{
-            //komunikat błędu
-            console.log('error', error);
             setError(true);
         })
 
@@ -48,7 +42,7 @@ const RegisterForm = (props) => {
                 <p>Password</p>
                 <input ref={ref=>{
                     passwordRef = ref;
-                }}type="test"/>
+                }}type="password"/>
                 <button onClick={onRegisterButtonClick}>Register</button>
             </form>
         </div>
