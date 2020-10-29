@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import PokemonList from './PokemonList';
 import { BrowserRouter, Route } from 'react-router-dom';
 import PokemonDetails from './PokemonDetails';
+import RegisterForm from './Register';
 
 ReactDOM.render(
   // <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
     <div>
       <Route exact path="/" component={PokemonList}/>
       <Route path="/pokemon/:name" component={PokemonDetails}/>
+      <Route path="/register" component={RegisterForm}/>
     </div>
   </BrowserRouter>,
   document.getElementById('root')
